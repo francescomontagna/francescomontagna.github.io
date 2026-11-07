@@ -23,11 +23,16 @@ links:
 # `page` is the content file stem: content/<section>/<page>.md
 sections:
   - id: profession
-    title: Francesco in the Profession
+    title: Francesco the Professional
     nav:
       - { page: index, label: Home }
       - { page: research, label: Research }
       - { page: cv, label: CV }
   - id: wild
     title: Francesco in the Wild
-    nav: []   # add pages here as content/wild/*.md gets written
+    nav:
+      - { page: activities, label: Activities }
+      - { page: writings, label: Writings }
+      - { page: blogging, label: Blogging }
+      - { page: miscellanea, label: Miscellanea }
+      - { page: hang-out, label: Let’s hang out! }

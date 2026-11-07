@@ -243,3 +243,16 @@ img { max-width: 100%; height: auto; }
   .glance dd { margin-bottom: .6rem; }
   .timeline li { grid-template-columns: 1fr; gap: .1rem; }
 }
+
+/* ---------- callout (wild) ---------- */
+
+.callout {
+  margin: 1.5rem 0;
+  padding: .9rem 1.25rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+.callout p { margin: .4rem 0; }
+.page li > ul { margin: .2rem 0 .4rem; }
+.wild-toc { list-style: none; padding: 0; }

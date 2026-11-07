@@ -1,0 +1,33 @@
+# Site-wide settings, shared by both sections.
+name: Francesco Montagna
+updated: November 2026
+lang: en
+
+photo: static/img/profession/me.jpg
+photo_alt: Francesco Montagna smiling on a beach at sunset
+
+# Contact address is written out in words to deter scrapers.
+email_text: "francesco dot montagna997 at gmail dot com"
+
+links:
+  - label: Google Scholar
+    url: https://scholar.google.com/citations?user=StwghVgAAAAJ&hl=en
+  - label: GitHub
+    url: https://github.com/francescomontagna
+  - label: X
+    url: https://x.com/fracesomotagna
+  - label: Resume (PDF)
+    url: https://drive.google.com/file/d/1Uhb67sTDjuzZdkKYsIIsmV37T-AXVDJR/view?usp=sharing
+
+# Navigation. Each section has a heading (linking to its index) and sub-pages.
+# `page` is the content file stem: content/<section>/<page>.md
+sections:
+  - id: profession
+    title: Francesco in the Profession
+    nav:
+      - { page: index, label: Home }
+      - { page: research, label: Research }
+      - { page: cv, label: CV }
+  - id: wild
+    title: Francesco in the Wild
+    nav: []   # add pages here as content/wild/*.md gets written

@@ -1,0 +1,23 @@
+<header class="site-header">
+  <a class="portrait" href="{{ root }}profession/index.html">
+    <img src="{{ root }}{{ site.photo }}" alt="{{ site.photo_alt }}" width="120" height="161">
+  </a>
+  <div class="masthead">
+    <p class="site-name"><a href="{{ root }}profession/index.html">{{ site.name }}</a></p>
+    <nav aria-label="Site">
+      {% for s in site.sections %}
+      <div class="nav-group nav-{{ s.id }}{% if s.id == section %} is-current{% endif %}">
+        <a class="nav-heading" href="{{ root }}{{ s.id }}/index.html"{% if s.id == section and url == s.id ~ '/index.html' %} aria-current="page"{% endif %}>{{ s.title }}</a>
+        {% if s.nav %}
+        <ul class="nav-links">
+          {% for item in s.nav %}
+          {% set href = s.id ~ '/' ~ item.page ~ '.html' %}
+          <li><a href="{{ root }}{{ href }}"{% if url == href %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

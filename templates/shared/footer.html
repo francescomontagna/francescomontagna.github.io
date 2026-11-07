@@ -1,0 +1,8 @@
+<footer class="site-footer">
+  <ul class="link-row">
+    {% for l in site.links %}
+    <li><a href="{{ l.url }}" rel="noopener">{{ l.label }}</a></li>
+    {% endfor %}
+  </ul>
+  <p>{{ site.email_text }} · Last updated {{ site.updated }}</p>
+</footer>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if page.title is defined and page.title %}{{ page.title }} · {% endif %}{{ site.name }}{% endblock %}</title>
+  {% if page.description is defined %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap">
+  <link rel="stylesheet" href="{{ root }}static/css/style.css">
+</head>
+<body class="section-{{ section }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {% include "shared/header.html" %}
+
+  <main id="main" class="page">
+    {% block main %}
+    {% if page.title is defined and page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+    {% block content %}{{ content }}{% endblock %}
+    {% endblock %}
+  </main>
+
+  {% include "shared/footer.html" %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "shared/base.html" %}
+{% block content %}
+{{ content }}
+{% for block in page.blocks %}
+<section class="cv-block" aria-labelledby="cv-{{ loop.index }}">
+  <h2 id="cv-{{ loop.index }}">{{ block.title }}</h2>
+  <ol class="timeline">
+    {% for e in block.entries %}
+    <li>
+      <span class="when">{{ e.when }}</span>
+      <div class="what">
+        <strong>{% if e.url is defined %}<a href="{{ e.url }}" rel="noopener">{{ e.where }}</a>{% else %}{{ e.where }}{% endif %}</strong>
+        <span>{{ e.role | mdi }}</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endfor %}
+{% if page.resume_url is defined %}<p class="more"><a href="{{ page.resume_url }}" rel="noopener">Full resume (PDF) →</a></p>{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "shared/base.html" %}
+{% macro links(ls) %}
+{% if ls %}<ul class="chips">{% for l in ls %}<li><a href="{{ l.url }}" rel="noopener">{{ l.label }}</a></li>{% endfor %}</ul>{% endif %}
+{% endmacro %}
+{% block content %}
+{{ content }}
+
+<nav class="toc" aria-label="On this page">
+  {% for g in page.groups %}<a href="#{{ g.id }}">{{ g.title }}</a>{% endfor %}
+</nav>
+
+{% for g in page.groups %}
+<section id="{{ g.id }}" class="pub-group">
+  <h2>{{ g.title }}</h2>
+  <ol class="pubs">
+    {% for p in g["items"] %}
+    <li class="pub">
+      <div class="pub-head">
+        <h3>{{ p.title }}</h3>
+        {% if p.venue is defined %}<span class="venue">{{ p.venue }}</span>{% endif %}
+      </div>
+      {% if p.tldr is defined %}<div class="tldr">{{ p.tldr | md }}</div>{% endif %}
+      {% if p.papers is defined %}
+      <ul class="subpapers">
+        {% for s in p.papers %}
+        <li><span>{{ s.title }}</span> <span class="venue">{{ s.venue }}</span> {{ links(s.links) }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {{ links(p.links if p.links is defined else []) }}
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endfor %}
+{% endblock %}

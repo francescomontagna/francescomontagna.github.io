@@ -1,0 +1,24 @@
+{% extends "shared/base.html" %}
+{% block title %}{{ site.name }}{% endblock %}
+{% block main %}
+<div class="intro">{{ content }}</div>
+
+<section class="glance" aria-labelledby="glance-h">
+  <h2 id="glance-h">At a glance</h2>
+  <dl>
+    {% for row in page.glance %}
+    <dt>{{ row.label }}</dt>
+    <dd>{{ row.value | mdi }}</dd>
+    {% endfor %}
+  </dl>
+</section>
+
+<section aria-labelledby="explore-h">
+  <h2 id="explore-h">On this site</h2>
+  <ul class="menu">
+    {% for m in page.menu %}
+    <li><a href="{{ root }}{{ m.href }}">{{ m.label }}</a> — {{ m.text | mdi }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

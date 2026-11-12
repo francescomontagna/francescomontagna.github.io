@@ -7,7 +7,7 @@ glance:
   - label: Next
     value: Postdoctoral fellow at [UCL](https://www.ucl.ac.uk/mathematical-physical-sciences/departments/statistical-science/people/academic-and-lecturing-staff/professor-ricardo-silva) with Ricardo Silva, from January 2027
   - label: Research
-    value: Causal discovery · causal representation learning · AI for cell biology
+    value: Causal discovery · causal inference · AI safety/interpretability
   - label: PhD
     value: University of Genoa, [ELLIS](https://ellis.eu/) PhD program (2022–2025)
   - label: Contact

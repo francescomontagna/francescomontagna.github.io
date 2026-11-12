@@ -4,6 +4,8 @@
 Usage:
     .venv/bin/python build.py            # build into site/
     .venv/bin/python build.py --serve    # build, then serve on http://localhost:8000
+    .venv/bin/python build.py --watch    # rebuild whenever content/templates/static change
+    .venv/bin/python build.py --serve --watch   # both: live preview while editing
 
 Each Markdown file may start with a YAML front-matter block delimited by '---'.
 Recognised keys (all optional):
@@ -110,21 +112,71 @@ def build() -> int:
     return count
 
 
-def serve(port: int) -> None:
+def serve(port: int, background: bool = False) -> None:
     import functools
     import http.server
+    import threading
 
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(OUT))
-    with http.server.ThreadingHTTPServer(("127.0.0.1", port), handler) as httpd:
-        print(f"Serving on http://localhost:{port}/  (Ctrl+C to stop)")
-        httpd.serve_forever()
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", port), handler)
+    print(f"Serving on http://localhost:{port}/  (Ctrl+C to stop)")
+    if background:
+        threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    else:
+        with httpd:
+            httpd.serve_forever()
+
+
+WATCHED = (CONTENT, TEMPLATES, STATIC)
+
+
+def snapshot() -> dict[Path, float]:
+    """Modification time of every file under the watched directories."""
+    return {
+        f: f.stat().st_mtime
+        for d in WATCHED
+        for f in d.rglob("*")
+        if f.is_file()
+    }
+
+
+def watch(interval: float = 0.5) -> None:
+    """Poll the source directories and rebuild when anything is added, removed or changed."""
+    import time
+
+    print("Watching content/, templates/ and static/ for changes (Ctrl+C to stop)")
+    last = snapshot()
+    while True:
+        time.sleep(interval)
+        current = snapshot()
+        if current == last:
+            continue
+        last = current
+        print(f"[{time.strftime('%H:%M:%S')}] Change detected, rebuilding...")
+        try:
+            build()
+        except Exception as exc:  # keep watching after a broken edit
+            print(f"Build failed: {type(exc).__name__}: {exc}")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--serve", action="store_true", help="serve site/ after building")
+    ap.add_argument("--watch", action="store_true", help="rebuild when source files change")
     ap.add_argument("--port", type=int, default=8000)
     args = ap.parse_args()
-    build()
-    if args.serve:
-        serve(args.port)
+    if args.watch:
+        try:
+            build()
+        except Exception as exc:
+            print(f"Build failed: {type(exc).__name__}: {exc}")
+        try:
+            if args.serve:
+                serve(args.port, background=True)
+            watch()
+        except KeyboardInterrupt:
+            print("\nStopped.")
+    else:
+        build()
+        if args.serve:
+            serve(args.port)

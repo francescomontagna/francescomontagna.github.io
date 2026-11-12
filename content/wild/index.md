@@ -18,7 +18,7 @@ Meanwhile, the [professional side](../profession/index.html) is open for busines
 </nav>
 
 <aside class="callout" markdown="1">
-💡 **TLDR;** Get in touch if anything that you read below resonates with you! Non exahustive list of good reasons to hit me up: we share some interest so we can do it together (check [activities](activities.html)); you see a person you’d like to get a coffee with! I also plan organize dinners from time to time, if you want nice home made pizza, subscribe to this mailing list :)
+💡 **TLDR;** Get in touch if anything that you read below resonates with you! Non exhaustive list of good reasons to hit me up: we share some interest so we can do it together (check [activities](activities.html)); you see a person you’d like to get a coffee with! I also plan organize dinners from time to time while in London, if you want nice home made pizza, subscribe to this mailing list :)
 </aside>
 
-For an exahustive rant check my [Let’s hang out](hang-out.html) page.
+For an exhaustive rant check my [Let’s hang out](hang-out.html) page.

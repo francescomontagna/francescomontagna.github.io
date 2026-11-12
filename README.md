@@ -36,6 +36,7 @@ pip install -r requirements.txt
 ```bash
 .venv/bin/python build.py           # writes site/
 .venv/bin/python build.py --serve   # build + preview at http://localhost:8000
+.venv/bin/python build.py --serve --watch   # same, and rebuild automatically on every edit
 ```
 
 ## Editing content
